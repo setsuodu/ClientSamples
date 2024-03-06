@@ -20,12 +20,14 @@ MonoBehaviour:
   - m_GUID: 0d5426d86c5f69442b02b622a9008ddb
     m_Address: Assets/Arts/Character/Aoi/Textures/f02_blazer_010_h.png
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - HD
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c39b93dcb2b4be44af60507c291d158
     m_Address: Assets/Arts/Character/Aoi/Textures/f02_face_00_h.png
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - HD
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4c9b976483a327f43b89baece97ffdfc, type: 2}
