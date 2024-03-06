@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         OnInited();
 #else
         // 加载配置（需要启动资源服务器）
-        StartCoroutine(ui_check.StartCheck(OnInited));
+        //StartCoroutine(ui_check.StartCheck(OnInited));
 #endif
     }
 
