@@ -2,33 +2,32 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 // AssetBundle格式包括：prefab, audio, bytes, texture, scene, fbx
-public class ABManager
+public class AAManager
 {
     const string PLATFORM_NAME = "";
 
-    static AssetsBytes _assetsBytes;
-    static AssetsBytes assetsBytes
-    {
-        get
-        {
-            if (_assetsBytes == null)
-                Reload();
-            return _assetsBytes;
-        }
-    }
-    static void Reload()
-    {
-        string assetsPath = $"{Application.persistentDataPath}/{PLATFORM_NAME}/assets.bytes"; //解析文件
-        string assetsJson = File.ReadAllText(assetsPath);
-        _assetsBytes = JsonConvert.DeserializeObject<AssetsBytes>(assetsJson);
-    }
+    //static AssetsBytes _assetsBytes;
+    //static AssetsBytes assetsBytes
+    //{
+    //    get
+    //    {
+    //        if (_assetsBytes == null)
+    //            Reload();
+    //        return _assetsBytes;
+    //    }
+    //}
+    //static void Reload()
+    //{
+    //    string assetsPath = $"{Application.persistentDataPath}/{PLATFORM_NAME}/assets.bytes"; //解析文件
+    //    string assetsJson = File.ReadAllText(assetsPath);
+    //    _assetsBytes = JsonConvert.DeserializeObject<AssetsBytes>(assetsJson);
+    //}
 
     public const string BUNDLES_FOLDER = "Assets/Bundles";
 
@@ -70,16 +69,15 @@ public class ABManager
         return prefab;
     }
 
-    public static void LoadScene(string fileName)
+    public static object LoadScene(string fileName)
     {
 #if UNITY_EDITOR && !USE_ASSETBUNDLE
-        string filePath = $"{BUNDLES_FOLDER}/Scenes/{fileName}.unity";
-        Object prefab = AssetDatabase.LoadAssetAtPath<Object>(filePath);
+        //string filePath = $"{BUNDLES_FOLDER}/{fileName}.prefab";
+        //GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(filePath);
 #else
 
 #endif
-        SceneManager.LoadScene(fileName, LoadSceneMode.Additive);
-        //SceneManager.LoadScene(fileName);
+        return null;
     }
 
     public static AudioClip LoadAudioClip(string fileName)
@@ -197,21 +195,21 @@ public class ABManager
         return sp;
     }
 
-    static string GetFilePath(string assetName)
-    {
-        //Debug.Log($"GetFilePath: {assetName.ToLower()}");
-        ABInfo obj = assetsBytes.ABInfoList.Where(x => x.filePath == assetName.ToLower()).FirstOrDefault();//转小写，因为iOS区分大小写
-        //Debug.Log($"obj: {obj.md5}");
-        string result = $"{Application.persistentDataPath}/{PLATFORM_NAME}/{obj.md5}.unity3d";
-        //Debug.Log($"result={result}");
-        return result;
-    }
+    //static string GetFilePath(string assetName)
+    //{
+    //    //Debug.Log($"GetFilePath: {assetName.ToLower()}");
+    //    ABInfo obj = assetsBytes.ABInfoList.Where(x => x.filePath == assetName.ToLower()).FirstOrDefault();//转小写，因为iOS区分大小写
+    //    //Debug.Log($"obj: {obj.md5}");
+    //    string result = $"{Application.persistentDataPath}/{PLATFORM_NAME}/{obj.md5}.unity3d";
+    //    //Debug.Log($"result={result}");
+    //    return result;
+    //}
 
-    static string[] GetDepends(string assetName)
-    {
-        ABInfo obj = assetsBytes.ABInfoList.Where(x => x.filePath == assetName.ToLower()).FirstOrDefault();
-        return obj.depend;
-    }
+    //static string[] GetDepends(string assetName)
+    //{
+    //    ABInfo obj = assetsBytes.ABInfoList.Where(x => x.filePath == assetName.ToLower()).FirstOrDefault();
+    //    return obj.depend;
+    //}
 
     private static Dictionary<string, GameObject> GameObjectPool = new Dictionary<string, GameObject>();
     public static GameObject GetGameObject(string key)
