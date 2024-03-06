@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 using UnityEditor;
 #endif
 
-public class ResManager
+// AssetBundle格式包括：prefab, audio, bytes, texture, scene, fbx
+public class ABManager
 {
     const string PLATFORM_NAME = "";
 
@@ -29,7 +30,6 @@ public class ResManager
     }
 
     public const string BUNDLES_FOLDER = "Assets/Bundles";
-    //public const string PREFAB_FOLDER = "Assets/Bundles/Prefabs";
 
     public static GameObject LoadPrefab(string fileName)
     {
@@ -68,7 +68,18 @@ public class ResManager
 #endif
         return prefab;
     }
-    
+
+    public static object LoadScene(string fileName)
+    {
+#if UNITY_EDITOR && !USE_ASSETBUNDLE
+        //string filePath = $"{BUNDLES_FOLDER}/{fileName}.prefab";
+        //GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(filePath);
+#else
+
+#endif
+        return null;
+    }
+
     public static AudioClip LoadAudioClip(string fileName)
     {
 #if UNITY_EDITOR && !USE_ASSETBUNDLE
@@ -134,6 +145,7 @@ public class ResManager
         return textAsset.bytes;
     }
 
+    // 贴图纹理
     public static Texture2D LoadTexture2D(string fileName)
     {
         Texture2D t2d;
@@ -149,6 +161,7 @@ public class ResManager
         return t2d;
     }
 
+    // 精灵纹理
     public static Dictionary<string, Sprite> LoadSprites(string fileName)
     {
         var array = fileName.Split('.');
