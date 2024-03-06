@@ -146,73 +146,18 @@ namespace HotFix
         // 连接服务器
         void ConnectToServer()
         {
-            //var connect = UIManager.Get().Push<UI_Connect>();
-            //m_OAuthBtn.gameObject.SetActive(false);
 
-            //ClientNet.Get._onConnected = () =>
-            //{
-            //    connect.Pop();
-            //    m_OAuthBtn.gameObject.SetActive(true);
-            //};
-            //ClientNet.Get.Connect((DisconnectInfo) =>
-            //{
-            //    UIManager.Get().PopAll();
-            //    UIManager.Get().Push<UI_Login>();
-            //    m_LoginPanel.gameObject.SetActive(false);
-            //    m_OAuthBtn.gameObject.SetActive(true);
-
-            //    // 比赛中需要销毁“ClientLogic”
-            //    GameManager.Get.CleanBattle();
-            //    ClientNet.Get.m_ClientRoom = null;
-
-            //    string reason = string.Empty;
-            //    switch (DisconnectInfo.Reason)
-            //    {
-            //        case DisconnectReason.ConnectionFailed:
-            //            reason = "连接失败";
-            //            break;
-            //        case DisconnectReason.RemoteConnectionClose:
-            //            reason = "断开连接";
-            //            break;
-            //        default:
-            //            reason = $"其他原因：{DisconnectInfo.Reason}";
-            //            break;
-            //    }
-            //    var toast = UIManager.Get().Push<UI_Toast>();
-            //    toast.Show(reason);
-            //});
         }
         private void OnOAuthBtnClick()
         {
-            //if (ClientNet.Get.IsConnect() == false)
-            //{
-            //    ConnectToServer();
-            //    return;
-            //}
-
-            ////#if Channel_102 //热更工程里没有宏，不能继承Unity的宏
-            //bool checkInstall = HookManager.Get.CheckInstall();
-            //if (ConstValue.CHANNEL_NAME == "Channel_102" && checkInstall)
-            //{
-            //    // 判断渠道号（根据平台和包名）。弹出默认登录或三方SDKView。
-            //    Debug.Log("主动请求");
-            //    HookManager.Get.JumpActivity();
-            //}
-            //else
-            //{
             m_LoginPanel.gameObject.SetActive(true);
             m_RegisterPanel.gameObject.SetActive(false);
-            //}
         }
 
         // 发送登录
         public void SendLogin()
         {
-            //UIManager.Get().Push<UI_Connect>();
-
-            //string UserName = m_UserNameField.text;
-            //string Password = m_PasswordField.text;
-            //ClientNet.Get.SendLogin(UserName, Password);
+            AudioManager.Get().PlaySound("decision13");
 
             UI_Toast ui = null;
             if (string.IsNullOrEmpty(m_UserNameField.text))
@@ -227,29 +172,32 @@ namespace HotFix
                 ui.Show("请填写密码");
                 return;
             }
-            ui = UIManager.Get().Push<UI_Toast>();
-            ui.Show("用户名或密码错误");
+            //ui = UIManager.Get().Push<UI_Toast>();
+            //ui.Show("登录成功");
+
+            ABManager.LoadScene("Game");
+            UIManager.Get().PopAll();
         }
         public void SendRegister()
         {
-            //if (string.IsNullOrEmpty(m_RegUserNameField.text))
-            //{
-            //    var ui = UIManager.Get().Push<UI_Toast>();
-            //    ui.Show("请填写用户名");
-            //    return;
-            //}
-            //if (string.IsNullOrEmpty(m_RegPasswordField.text))
-            //{
-            //    var ui = UIManager.Get().Push<UI_Toast>();
-            //    ui.Show("请填写密码");
-            //    return;
-            //}
-            //if (!m_RegPassword2Field.text.Equals(m_RegPasswordField.text))
-            //{
-            //    var ui = UIManager.Get().Push<UI_Toast>();
-            //    ui.Show("两次密码不一致，请重新输入");
-            //    return;
-            //}
+            if (string.IsNullOrEmpty(m_RegUserNameField.text))
+            {
+                var ui = UIManager.Get().Push<UI_Toast>();
+                ui.Show("请填写用户名");
+                return;
+            }
+            if (string.IsNullOrEmpty(m_RegPasswordField.text))
+            {
+                var ui = UIManager.Get().Push<UI_Toast>();
+                ui.Show("请填写密码");
+                return;
+            }
+            if (!m_RegPassword2Field.text.Equals(m_RegPasswordField.text))
+            {
+                var ui = UIManager.Get().Push<UI_Toast>();
+                ui.Show("两次密码不一致，请重新输入");
+                return;
+            }
 
             string UserName = m_RegUserNameField.text;
             string Password = m_RegPasswordField.text;

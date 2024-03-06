@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -69,15 +70,16 @@ public class ABManager
         return prefab;
     }
 
-    public static object LoadScene(string fileName)
+    public static void LoadScene(string fileName)
     {
 #if UNITY_EDITOR && !USE_ASSETBUNDLE
-        //string filePath = $"{BUNDLES_FOLDER}/{fileName}.prefab";
-        //GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(filePath);
+        string filePath = $"{BUNDLES_FOLDER}/Scenes/{fileName}.unity";
+        Object prefab = AssetDatabase.LoadAssetAtPath<Object>(filePath);
+        SceneManager.LoadScene(fileName, LoadSceneMode.Additive);
+        //SceneManager.LoadScene(fileName);
 #else
 
 #endif
-        return null;
     }
 
     public static AudioClip LoadAudioClip(string fileName)

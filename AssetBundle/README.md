@@ -6,3 +6,4 @@
 		- LoadPrefab()等API保留。
 - [ ] 2. 做一个Editor，要求填写ProductName，CompanyName，等，填完提交，自动生成配置/常量脚本。起到提示作用。
 - [ ] 3. 项目里自建一个Web，StreamingAssets中。
+- [ ] 4. 配打包脚本。

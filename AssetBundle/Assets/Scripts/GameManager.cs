@@ -61,9 +61,9 @@ public class GameManager : MonoBehaviour
         //configManager.transform.SetParent(this.transform);
         //configManager.AddComponent<ConfigManager>();
 
-        //GameObject audioManager = new GameObject("AudioManager");
-        //audioManager.transform.SetParent(this.transform);
-        //audioManager.AddComponent<AudioManager>();
+        GameObject audioManager = new GameObject("AudioManager");
+        audioManager.transform.SetParent(this.transform);
+        audioManager.AddComponent<AudioManager>();
 
 
         // 初始UI
