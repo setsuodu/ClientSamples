@@ -74,31 +74,6 @@ public class DBApp
     public int relation;
 }
 
-public class Present
-{
-    public Present()
-    {
-        web = "https://moegijinka.cn";
-        gate = "moegijinka.cn"; //本地host配了域名
-        app_url = $"https://moegijinka.cn/{UnityEngine.Application.productName}";
-        res_url = $"http://app.moegijinka.cn/{UnityEngine.Application.productName}/res";
-        app_version = "1.0.0";
-        res_version = "1";
-        notice = string.Empty;
-    }
-    public string web;          //官网
-    public string gate;         //服务器连接
-    public string app_url;      //App下载地址
-    public string res_url;      //AB包地址
-    public string app_version;  //官方App版本
-    public string res_version;  //官方资源版本
-    public string notice;       //公告
-    public override string ToString()
-    {
-        string content = $"\n[web] {web}\n[gate] {gate}\n[app_url] {app_url}\n[res_url] {res_url}\n[app_version] {app_version}\n[res_version] {res_version}\n[notice] {notice}";
-        return content;
-    }
-}
 public class C2S_Deploy
 {
     public C2S_Deploy()

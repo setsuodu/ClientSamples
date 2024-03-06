@@ -19,7 +19,8 @@ public class ABInfo
     public string md5;
     public string[] depend;
 }
-//assets.bytes
+
+//assets.bytes（AB文件目录文本）
 [System.Serializable]
 public class AssetsBytes
 {
