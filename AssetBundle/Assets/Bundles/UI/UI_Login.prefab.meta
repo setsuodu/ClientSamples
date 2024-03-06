@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 7f53e0d1e06690041a65c471bdc59467
+guid: 499e094d41edf06449d5d8888e62ce7e
 PrefabImporter:
   externalObjects: {}
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: ui/ui_login
+  assetBundleVariant: unity3d

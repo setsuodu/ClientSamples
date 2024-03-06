@@ -91,24 +91,6 @@ namespace HotFix
             //EventManager.UnRegisterEvent(OnNetCallback);
         }
 
-#if UNITY_EDITOR || Channel_1
-        static GUIStyle _custom;
-        static GUIStyle customButton { get { if (_custom == null) { _custom = new GUIStyle("button") { fontSize = 30 }; } return _custom; } }
-        void OnGUI()
-        {
-            if (GUI.Button(new Rect(0, 0, 300, 100), "自动填写.test1", customButton))
-            {
-                m_UserNameField.text = "test1";
-                m_PasswordField.text = "123456";
-            }
-            if (GUI.Button(new Rect(0, 100, 300, 100), "自动填写.test2", customButton))
-            {
-                m_UserNameField.text = "test2";
-                m_PasswordField.text = "123456";
-            }
-        }
-#endif
-
         public override void ApplyLanguage()
         {
             //var config = ConfigManager.Get();
@@ -218,8 +200,8 @@ namespace HotFix
             //}
             //else
             //{
-            //    m_LoginPanel.gameObject.SetActive(true);
-            //    m_RegisterPanel.gameObject.SetActive(false);
+            m_LoginPanel.gameObject.SetActive(true);
+            m_RegisterPanel.gameObject.SetActive(false);
             //}
         }
 
@@ -231,6 +213,22 @@ namespace HotFix
             //string UserName = m_UserNameField.text;
             //string Password = m_PasswordField.text;
             //ClientNet.Get.SendLogin(UserName, Password);
+
+            UI_Toast ui = null;
+            if (string.IsNullOrEmpty(m_UserNameField.text))
+            {
+                ui = UIManager.Get().Push<UI_Toast>();
+                ui.Show("请填写用户名");
+                return;
+            }
+            if (string.IsNullOrEmpty(m_PasswordField.text))
+            {
+                ui = UIManager.Get().Push<UI_Toast>();
+                ui.Show("请填写密码");
+                return;
+            }
+            ui = UIManager.Get().Push<UI_Toast>();
+            ui.Show("用户名或密码错误");
         }
         public void SendRegister()
         {
