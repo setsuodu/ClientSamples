@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Get;
+
     private static bool Initialized = false;
     public static LaunchGet launchGet;
 
@@ -113,13 +114,7 @@ public class GameManager : MonoBehaviour
 
         // 进入HotFix代码
         //ConfigManager.Get().Load(); //AB加载完毕，加载配置
-
-        //GameObject uiManager = new GameObject("UIManager");
-        //uiManager.transform.SetParent(this.transform);
-        //uiManager.AddComponent<HotFix.UIManager>();
-
-        // 加载第一个UI
-        //UIManager.Get().Push<UI_Login>();
+        ILGlobal.Get.GlobalInit();
 
         ui_check.gameObject.SetActive(false);
     }

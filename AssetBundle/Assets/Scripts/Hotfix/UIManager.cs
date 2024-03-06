@@ -11,7 +11,6 @@ namespace HotFix
             return _instance;
         }
 
-        [SerializeField]
         private Transform Parent;
         //private Transform Top;
 
@@ -92,7 +91,6 @@ namespace HotFix
             }
             else
             {
-                /*
                 GameObject prefab = ABManager.LoadPrefab($"UI/{scriptName}"); //iOS区分大小写？
                 GameObject obj = Instantiate(prefab, Parent);
                 obj.transform.localPosition = Vector3.zero;
@@ -104,8 +102,6 @@ namespace HotFix
                 stack.Add(scriptName, script);
                 //Debug.Log($"<color=yellow>[New]{scriptName} stack:{stack.Count}/recycle:{recyclePool.Count}</color>");
                 return script;
-                */
-                return null;
             }
         }
 
