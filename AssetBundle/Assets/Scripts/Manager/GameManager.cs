@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour
         //configManager.transform.SetParent(this.transform);
         //configManager.AddComponent<ConfigManager>();
 
+        GameObject poolManager = new GameObject("PoolManager");
+        poolManager.transform.SetParent(this.transform);
+        poolManager.AddComponent<PoolManager>();
+
         GameObject audioManager = new GameObject("AudioManager");
         audioManager.transform.SetParent(this.transform);
         audioManager.AddComponent<AudioManager>();

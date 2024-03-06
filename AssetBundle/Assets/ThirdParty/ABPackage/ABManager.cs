@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 #endif
 
-// AssetBundle格式包括：prefab, audio, bytes, texture, scene, fbx
+// AssetBundle格式包括：prefab, audio, bytes, material, texture, scene, fbx
 public class ABManager
 {
     const string PLATFORM_NAME = "";
