@@ -20,7 +20,8 @@ MonoBehaviour:
   - m_GUID: d06fcd957cc710e498c559c14944851b
     m_Address: Assets/Bundles
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - HD
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: da70c7b1c5e72ef45b8ca5226bfa2c5d, type: 2}

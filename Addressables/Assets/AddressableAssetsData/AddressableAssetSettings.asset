@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 8973d71cf7b72c942bfd098aa413d115
   m_currentHash:
     serializedVersion: 2
-    Hash: 3f432f7d9ccb290d4f72587501cb35af
+    Hash: dece297e7c36dace8b6b7fb26da12fec
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
       - m_Id: 3014a5856d282a64f81cb40be97b0599
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
       - m_Id: 9b54daebfe11ba14f86f67e9c3ceaf99
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+        m_Value: http://192.168.1.103:80/ServerData/[BuildTarget]
       - m_Id: 9b8f70334f1c8314d8c1bf75587abec8
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: e8ff355963b74364c85b84db7e7c08be
@@ -88,6 +88,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - HD
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: a0d8d79698d120e48a4a39d55c17502e, type: 2}
@@ -106,5 +107,6 @@ MonoBehaviour:
     m_HostingServiceInfos: []
     m_Settings: {fileID: 11400000}
     m_NextInstanceId: 0
-    m_RegisteredServiceTypeRefs: []
+    m_RegisteredServiceTypeRefs:
+    - UnityEditor.AddressableAssets.HostingServices.HttpHostingService, Unity.Addressables.Editor
     m_PingTimeoutInMilliseconds: 5000
