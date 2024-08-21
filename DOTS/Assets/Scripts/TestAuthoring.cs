@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
 
@@ -6,7 +6,7 @@ public class TestAuthoring : MonoBehaviour
 {
     public float number;
 
-    // ºæ±º MonoÊı¾İ ¡ú DOTSÊı¾İ
+    // çƒ˜ç„™ Monoæ•°æ® â†’ DOTSæ•°æ®
     class TestBaker : Baker<TestAuthoring>
     {
         public override void Bake(TestAuthoring authoring)
@@ -20,21 +20,25 @@ public class TestAuthoring : MonoBehaviour
     }
 }
 
-// ¼Ì³ĞIComponentData£¬ÆÕÍ¨½á¹¹Ìå ±äÎª DOTSµÄ½á¹¹Ìå
-// ½á¹¹ÌåÊÇÏÖÊµÔÚRuntimeÉÏµÄ×é¼ş£¬ÒòÎªDOTS±¾Éí¾ÍÈ«ÊÇ×é¼ş»¯½á¹¹Ìå¹¹³ÉµÄ
+// ç»§æ‰¿IComponentDataï¼Œæ™®é€šç»“æ„ä½“ å˜ä¸º DOTSçš„ç»“æ„ä½“
+// ç»“æ„ä½“æ˜¯ç°å®åœ¨Runtimeä¸Šçš„ç»„ä»¶ï¼Œå› ä¸ºDOTSæœ¬èº«å°±å…¨æ˜¯ç»„ä»¶åŒ–ç»“æ„ä½“æ„æˆçš„
 public struct TestData : IComponentData
 {
     public float m_Number;
 }
 
-// System¿ØÖÆÉúÃüÖÜÆÚ
-// System²»ÒÀÀµ³¡¾°ÖĞµÄObject£¬¼´Ê¹Ã»ÓĞ´´½¨Ò²»á×ßÉúÃüÖÜÆÚ
+// Systemæ§åˆ¶ç”Ÿå‘½å‘¨æœŸ
+// Systemä¸ä¾èµ–åœºæ™¯ä¸­çš„Objectï¼Œå³ä½¿æ²¡æœ‰åˆ›å»ºä¹Ÿä¼šèµ°ç”Ÿå‘½å‘¨æœŸ
+// Systemåªæœ‰OnUpdateå‡½æ•°ï¼Œç”¨åˆ°LateUpdateï¼ŒFixedUpdateéœ€è¦åŠ [UpdateInGroup]æ ‡ç­¾
+//[UpdateInGroup(typeof(SimulationSystemGroup))] //â†’ Update
+[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))] //â†’ FixedUpdate
 public partial struct TestSystem : ISystem
 {
-    // 
     public void OnCreate(ref SystemState state)
     {
-        Debug.Log("OnCreate");
+        state.RequireForUpdate<TestData>(); //ç¡®ä¿å½“å‰åœºæ™¯å†…æœ‰TestDataï¼Œæ‰æ‰§è¡ŒUpdateã€‚
+
+        state.RequireForUpdate<ExecutorData>(); //å¤–éƒ¨å¼€å…³
     }
 
     public void OnDestroy(ref SystemState state)
@@ -44,24 +48,24 @@ public partial struct TestSystem : ISystem
 
     public void OnUpdate(ref SystemState state)
     {
-        // »ñÈ¡³¡¾°ÖĞËùÓĞµÄTestData
-        // RefRO=Ö»¶Á£¬RefRW=¶ÁĞ´£¬¿ÉĞŞ¸Ä
-        // µ¥Ò»Ìõ¼şËÑË÷
+        // è·å–åœºæ™¯ä¸­æ‰€æœ‰çš„TestData
+        // RefRO=åªè¯»ï¼ŒRefRW=è¯»å†™ï¼Œå¯ä¿®æ”¹
+        // å•ä¸€æ¡ä»¶æœç´¢
         //foreach (var test in SystemAPI.Query<RefRO<TestData>>())
         //{
         //    float speed = test.ValueRO.m_Number;
         //}
 
-        // SceneÊÀ½çµÄÖµ£¬ÍĞ¹ÜÀàĞÍ£¬·ÃÎÊµÍĞ§
+        // Sceneä¸–ç•Œçš„å€¼ï¼Œæ‰˜ç®¡ç±»å‹ï¼Œè®¿é—®ä½æ•ˆ
         //float delta = Time.deltaTime;
         float deltaS = SystemAPI.Time.DeltaTime;
 
-        // Ë«¸öÌõ¼şËÑË÷
-        foreach (var (test,trans) in SystemAPI.Query<RefRO<TestData>, RefRO<LocalTransform>>())
+        // åŒä¸ªæ¡ä»¶æœç´¢
+        foreach (var (test,trans) in SystemAPI.Query<RefRO<TestData>, RefRW<LocalTransform>>())
         {
             float speed = test.ValueRO.m_Number;
-            trans.ValueRO.RotateY(speed * deltaS);
-            Debug.Log($"OnUpdate : {speed * deltaS}");
+            trans.ValueRW = trans.ValueRO.RotateY(speed * deltaS);
+            //Debug.Log($"OnUpdate : {speed * deltaS}");
         }
     }
 }
