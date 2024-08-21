@@ -34,7 +34,7 @@ public partial struct TestSystem : ISystem
     // 
     public void OnCreate(ref SystemState state)
     {
-    
+        Debug.Log("OnCreate");
     }
 
     public void OnDestroy(ref SystemState state)
@@ -61,6 +61,7 @@ public partial struct TestSystem : ISystem
         {
             float speed = test.ValueRO.m_Number;
             trans.ValueRO.RotateY(speed * deltaS);
+            Debug.Log($"OnUpdate : {speed * deltaS}");
         }
     }
 }
