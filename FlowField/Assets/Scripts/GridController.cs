@@ -21,6 +21,8 @@ public class GridController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             InitializeFlowField();
+
+            curFlowField.CreateCostField();
         }
     }
 

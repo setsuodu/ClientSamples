@@ -11,4 +11,11 @@ public class Cell
         this.worldPos = _worldPos;
         this.gridIndex = _gridIndex;
     }
+
+    public void IncreaseCost(int amnt)
+    {
+        if (cost == byte.MaxValue) { return; }
+        if (amnt + cost >= 255) { cost = byte.MaxValue; }
+        else { cost += (byte)amnt; }
+    }
 }
