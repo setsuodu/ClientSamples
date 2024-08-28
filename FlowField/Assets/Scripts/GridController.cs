@@ -6,50 +6,32 @@ public class GridController : MonoBehaviour
 {
     public Vector2Int gridSize;
     public float cellRadius = 0.5f;
-    [SerializeField]
     public FlowField curFlowField;
+	public GridDebug gridDebug;
 
-    public void InitializeFlowField()
-    {
+    private void InitializeFlowField()
+	{
         curFlowField = new FlowField(cellRadius, gridSize);
         curFlowField.CreateGrid();
-        Debug.Log($"create : {cellRadius}, {gridSize}");
-    }
+		gridDebug.SetFlowField(curFlowField);
+	}
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            InitializeFlowField();
+	private void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			InitializeFlowField();
 
-            curFlowField.CreateCostField();
-        }
-    }
+			curFlowField.CreateCostField();
 
-    void OnDrawGizmos()
-    {
-        if (curFlowField == null)
-        {
-            DrawGrid(gridSize, Color.yellow, cellRadius);
-        }
-        else
-        {
-            DrawGrid(gridSize, Color.green, cellRadius);
-        }
-    }
+			Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f);
+			Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+			Cell destinationCell = curFlowField.GetCellFromWorldPos(worldMousePos);
+			curFlowField.CreateIntegrationField(destinationCell);
 
-    void DrawGrid(Vector2Int drawGridSize, Color color , float drawCellRadius)
-    {
-        Gizmos.color = color;
+			curFlowField.CreateFlowField();
 
-        for (int x = 0; x < drawGridSize.x; x++)
-        {
-            for (int y = 0; y < drawGridSize.y; y++)
-            {
-                Vector3 center = new Vector3(drawCellRadius * 2 * x + drawCellRadius, 0, drawCellRadius * 2 * y + drawCellRadius);
-                Vector3 size = Vector3.one * drawCellRadius * 2;
-                Gizmos.DrawWireCube(center, size);
-            }
-        }
-    }
+			gridDebug.DrawFlowField();
+		}
+	}
 }
