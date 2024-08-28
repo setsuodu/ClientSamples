@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +20,7 @@ public class UnitController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			SpawnUnits();
-		}
+        }
 
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
@@ -47,7 +46,7 @@ public class UnitController : MonoBehaviour
 		float nodeRadius = gridController.cellRadius;
 		Vector2 maxSpawnPos = new Vector2(gridSize.x * nodeRadius * 2 + nodeRadius, gridSize.y * nodeRadius * 2 + nodeRadius);
 		int colMask = LayerMask.GetMask("Impassible", "Units");
-		Vector3 newPos;
+		Vector3 newPos = Vector3.zero;
 		for (int i = 0; i < numUnitsPerSpawn; i++)
 		{
 			GameObject newUnit = Instantiate(unitPrefab);
@@ -59,8 +58,8 @@ public class UnitController : MonoBehaviour
 				newUnit.transform.position = newPos;
 			}
 			while (Physics.OverlapSphere(newPos, 0.25f, colMask).Length > 0);
-		}
-	}
+        }
+    }
 
 	private void DestroyUnits()
 	{

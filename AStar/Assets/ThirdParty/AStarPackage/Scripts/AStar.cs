@@ -14,6 +14,11 @@ public class AStar : MonoBehaviour
     public Point start;
     public Point end;
 
+    public Color lineColor = Color.gray;
+    public Color obstacleColor = Color.black;
+    public Color startColor = Color.green;
+    public Color endColor = Color.red;
+
     void Start()
     {
         InitMap();
@@ -44,15 +49,15 @@ public class AStar : MonoBehaviour
     public void AddObstacle(int x, int y)//添加障碍
     {
         map[x, y].isObstacle = true;
-        sprites[x, y].color = Color.black;
+        sprites[x, y].color = obstacleColor;
     }
 
     public void SetStartAndEnd(int startX, int startY, int endX, int endY)//设置起点和终点
     {
         start = map[startX, startY];
-        sprites[startX, startY].color = Color.green;
+        sprites[startX, startY].color = startColor;
         end = map[endX, endY];
-        sprites[endX, endY].color = Color.red;
+        sprites[endX, endY].color = endColor;
     }
 
     public void ShowPath()//显示路径
@@ -60,7 +65,7 @@ public class AStar : MonoBehaviour
         Point temp = end.parent;
         while (temp != start)
         {
-            sprites[temp.X, temp.Y].color = Color.gray;
+            sprites[temp.X, temp.Y].color = lineColor;
             temp = temp.parent;
         }
     }

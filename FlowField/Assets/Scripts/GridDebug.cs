@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 
-
 public enum FlowFieldDisplayType { None, AllIcons, DestinationIcon, CostField, IntegrationField };
 
 public class GridDebug : MonoBehaviour
@@ -28,7 +27,7 @@ public class GridDebug : MonoBehaviour
 		cellRadius = newFlowField.cellRadius;
 		gridSize = newFlowField.gridSize;
 	}
-	
+
 	public void DrawFlowField()
 	{
 		ClearCellDisplay();
@@ -72,7 +71,7 @@ public class GridDebug : MonoBehaviour
 		iconGO.transform.localScale = Vector3.one * 0.1f;
 
 
-        if (cell.cost == 0)
+		if (cell.cost == 0)
 		{
 			iconSR.sprite = ffIcons[3];
 			Quaternion newRot = Quaternion.Euler(90, 0, 0);
@@ -145,7 +144,7 @@ public class GridDebug : MonoBehaviour
 			GameObject.Destroy(t.gameObject);
 		}
 	}
-	
+
 	private void OnDrawGizmos()
 	{
 		if (displayGrid)
@@ -159,7 +158,7 @@ public class GridDebug : MonoBehaviour
 				DrawGrid(gridSize, Color.green, cellRadius);
 			}
 		}
-		
+
 		if (curFlowField == null) { return; }
 
 		GUIStyle style = new GUIStyle(GUI.skin.label);
@@ -174,7 +173,7 @@ public class GridDebug : MonoBehaviour
 					Handles.Label(curCell.worldPos, curCell.cost.ToString(), style);
 				}
 				break;
-				
+
 			case FlowFieldDisplayType.IntegrationField:
 
 				foreach (Cell curCell in curFlowField.grid)
@@ -182,11 +181,11 @@ public class GridDebug : MonoBehaviour
 					Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
 				}
 				break;
-				
+
 			default:
 				break;
 		}
-		
+
 	}
 
 	private void DrawGrid(Vector2Int drawGridSize, Color drawColor, float drawCellRadius)

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,7 +66,7 @@ public class FlowField
 
 		cellsToCheck.Enqueue(destinationCell);
 
-		while(cellsToCheck.Count > 0)
+		while (cellsToCheck.Count > 0)
 		{
 			Cell curCell = cellsToCheck.Dequeue();
 			List<Cell> curNeighbors = GetNeighborCells(curCell.gridIndex, GridDirection.CardinalDirections);
@@ -86,15 +84,15 @@ public class FlowField
 
 	public void CreateFlowField()
 	{
-		foreach(Cell curCell in grid)
+		foreach (Cell curCell in grid)
 		{
 			List<Cell> curNeighbors = GetNeighborCells(curCell.gridIndex, GridDirection.AllDirections);
 
 			int bestCost = curCell.bestCost;
 
-			foreach(Cell curNeighbor in curNeighbors)
+			foreach (Cell curNeighbor in curNeighbors)
 			{
-				if(curNeighbor.bestCost < bestCost)
+				if (curNeighbor.bestCost < bestCost)
 				{
 					bestCost = curNeighbor.bestCost;
 					curCell.bestDirection = GridDirection.GetDirectionFromV2I(curNeighbor.gridIndex - curCell.gridIndex);
