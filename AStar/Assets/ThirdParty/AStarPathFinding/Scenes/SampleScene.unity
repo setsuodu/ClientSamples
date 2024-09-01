@@ -170,10 +170,11 @@ MonoBehaviour:
   StartPosition: {fileID: 280188192}
   WallMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   vGridWorldSize: {x: 30, y: 30}
   fNodeRadius: 0.5
   fDistanceBetweenNodes: 0
+  FinalPath: []
 --- !u!4 &95003025
 Transform:
   m_ObjectHideFlags: 0
@@ -412,7 +413,7 @@ GameObject:
   - component: {fileID: 381070860}
   - component: {fileID: 381070859}
   - component: {fileID: 381070858}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +610,7 @@ GameObject:
   - component: {fileID: 851404314}
   - component: {fileID: 851404313}
   - component: {fileID: 851404312}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -870,7 +871,7 @@ GameObject:
   - component: {fileID: 1575495228}
   - component: {fileID: 1575495227}
   - component: {fileID: 1575495226}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +976,7 @@ GameObject:
   - component: {fileID: 1678682708}
   - component: {fileID: 1678682707}
   - component: {fileID: 1678682706}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
