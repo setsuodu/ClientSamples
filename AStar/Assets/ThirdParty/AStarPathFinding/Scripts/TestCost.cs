@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CalCost : MonoBehaviour
+public class TestCost : MonoBehaviour
 {
     Grid GridReference;//For referencing the grid class
 
@@ -13,6 +11,7 @@ public class CalCost : MonoBehaviour
 
     void Update()
     {
+        // 右键，计算代价
         if (Input.GetMouseButtonDown(1))
         {
             Vector3 mouse = Input.mousePosition;

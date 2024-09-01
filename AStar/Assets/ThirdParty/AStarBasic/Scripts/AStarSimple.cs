@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AStar : MonoBehaviour
+public class AStarSimple : MonoBehaviour
 {
     public const int width = 10;
     public const int height = 10;
