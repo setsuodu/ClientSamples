@@ -33,7 +33,8 @@ public class AStarSimple : MonoBehaviour
         ShowPath();
     }
 
-    public void InitMap()//初始化地图
+    // 初始化地图
+    public void InitMap()
     {
         for (int i = 0; i < width; i++)
         {
@@ -45,28 +46,20 @@ public class AStarSimple : MonoBehaviour
         }
     }
 
-    public void AddObstacle(int x, int y)//添加障碍
+    // 添加障碍
+    public void AddObstacle(int x, int y)
     {
         map[x, y].isObstacle = true;
         sprites[x, y].color = obstacleColor;
     }
 
-    public void SetStartAndEnd(int startX, int startY, int endX, int endY)//设置起点和终点
+    // 设置起点和终点
+    public void SetStartAndEnd(int startX, int startY, int endX, int endY)
     {
         start = map[startX, startY];
         sprites[startX, startY].color = startColor;
         end = map[endX, endY];
         sprites[endX, endY].color = endColor;
-    }
-
-    public void ShowPath()//显示路径
-    {
-        Point temp = end.parent;
-        while (temp != start)
-        {
-            sprites[temp.X, temp.Y].color = lineColor;
-            temp = temp.parent;
-        }
     }
 
     public void FindPath()
@@ -76,10 +69,10 @@ public class AStarSimple : MonoBehaviour
         openList.Add(start);
         while (openList.Count > 0)//只要开放列表还存在元素就继续
         {
-            Point point = GetMinFOfList(openList);//选出open集合中F值最小的点
+            Point point = GetMinFOfList(openList);//选出open集合中代价最小的
             openList.Remove(point);
             closeList.Add(point);
-            List<Point> SurroundPoints = GetSurroundPoint(point.X, point.Y);
+            List<Point> SurroundPoints = GetSurroundPoint(point.X, point.Y); //获取周围点
 
             foreach (Point p in closeList)//在周围点中把已经在关闭列表的点删除
             {
@@ -115,7 +108,19 @@ public class AStarSimple : MonoBehaviour
         }
     }
 
-    public List<Point> GetSurroundPoint(int x, int y)//得到一个点周围的点
+    // 显示路径
+    public void ShowPath()
+    {
+        Point temp = end.parent;
+        while (temp != start)
+        {
+            sprites[temp.X, temp.Y].color = lineColor;
+            temp = temp.parent;
+        }
+    }
+
+    // 得到一个点周围的点 2/3/4 个
+    public List<Point> GetSurroundPoint(int x, int y)
     {
         List<Point> PointList = new List<Point>();
         if (x > 0 && !map[x - 1, y].isObstacle)
@@ -137,7 +142,8 @@ public class AStarSimple : MonoBehaviour
         return PointList;
     }
 
-    public void GetF(Point point)//计算某个点的F值
+    // 计算该点总代价
+    public void GetF(Point point)
     {
         int G = 0;
         int H = Mathf.Abs(end.X - point.X) + Mathf.Abs(end.Y - point.Y);
@@ -151,7 +157,8 @@ public class AStarSimple : MonoBehaviour
         point.F = F;
     }
 
-    public Point GetMinFOfList(List<Point> list)//得到一个集合中F值最小的点
+    // 筛选总代价最小的点
+    public Point GetMinFOfList(List<Point> list)
     {
         int min = int.MaxValue;
         Point point = null;
