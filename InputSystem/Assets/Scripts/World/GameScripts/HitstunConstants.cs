@@ -151,6 +151,7 @@ namespace HitstunConstants
         HIT_CROUCH,
 
         // attacks
+        STAND_LP,
         CROUCH_MK,
         HADOUKEN
     }

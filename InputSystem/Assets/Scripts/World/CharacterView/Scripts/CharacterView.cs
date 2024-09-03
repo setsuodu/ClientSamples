@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using HitstunConstants;
-using UnityEditor;
 
 // PlayerController
 public class CharacterView : MonoBehaviour
@@ -51,7 +50,7 @@ public class CharacterView : MonoBehaviour
         data = _data;
 
         //var prefab = ResManager.LoadPrefab($"Prefabs/{data.name}");
-        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Bundles/Prefabs/Player.prefab");
+        var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Bundles/Prefabs/Player.prefab");
         model = Instantiate(prefab, transform).transform;
         model.name = "model";
         animator = model.GetComponentInChildren<Animator>();
@@ -70,7 +69,7 @@ public class CharacterView : MonoBehaviour
         //    return; //持续++。死亡动画播放完，彻底不再播放动画。
         //}
         animator.Play(currentAnimation.animationName, 0, (float)currentFrame / currentAnimation.totalFrames); //卡顿
-        //Debug.Log($"Anim : {currentState}");
+        Debug.Log($"Anim : {currentState}");
 
         // x and y position
         float viewX = ((character.position.x - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);

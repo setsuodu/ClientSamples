@@ -323,7 +323,7 @@ public class Character
 
     public bool isAttacking()
     {
-        return state == CharacterState.CROUCH_MK || state == CharacterState.HADOUKEN;
+        return state == CharacterState.STAND_LP || state == CharacterState.CROUCH_MK || state == CharacterState.HADOUKEN;
     }
 
     public bool IsAirborne()
@@ -633,6 +633,18 @@ public class Character
                 velocity.x += Constants.FRICTION;
                 velocity.x = Mathf.Min(velocity.x, 0);
                 break;
+            // STAND_LP STATE
+            case CharacterState.STAND_LP:
+                velocity.x += Constants.FRICTION;
+                velocity.x = Mathf.Min(velocity.x, 0);
+                // check for cancels
+                if (CheckSpecialCancel(data)) break;
+                // end state
+                if (framesInState >= data.attacks[state.ToString()].totalFrames - 1)
+                {
+                    SetCharacterState(CharacterState.STAND);
+                }
+                break;
             // CROUCH_MK STATE
             case CharacterState.CROUCH_MK:
                 velocity.x += Constants.FRICTION;
@@ -709,6 +721,19 @@ public class Character
 
     public bool CheckStandingAttacks(CharacterData data)
     {
+        if (CheckSequence(new uint[] { (uint)Inputs.INPUT_LP, (uint)Inputs.INPUT_nLP }, Constants.LENIENCY_BUFFER))
+        {
+            SetCharacterState(CharacterState.STAND_LP);
+            // prepare the hitboxes
+            //foreach (HitBox hb in data.attacks[state.ToString()].hitBoxes)
+            //{
+            //    HitBox hitBox = new HitBox(hb);
+            //    hitBox.enabled = false;
+            //    hitBox.used = false;
+            //    hitBoxes.Add(hitBox);
+            //}
+            return true;
+        }
         return false;
     }
 

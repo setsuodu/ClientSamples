@@ -150,7 +150,6 @@ public enum HitBoxType
 [Serializable]
 public class HitBox : Box
 {
-
     public int startingFrame;
     public int duration;
     public bool enabled;
@@ -238,7 +237,6 @@ public class Projectile {
         hitBox.blockstun = 15;
         hitBox.hitstun = 15;
         hitBox.used = false;
-
     }
 
     public Projectile(Projectile copy) 
@@ -289,7 +287,8 @@ public class Projectile {
 }
 
 [Serializable]
-public class ProjectileData {
+public class ProjectileData
+{
     public string animationName;
     public int distinctSprites;
     public int totalFrames;
