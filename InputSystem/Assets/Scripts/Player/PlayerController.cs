@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+锘縰sing UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Get;
+
     public PlayerInput playerInput;
     [SerializeField]
     private Animator animator;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Get = this;
         playerInput = GetComponent<PlayerInput>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         currentControlScheme = playerInput.currentControlScheme;
@@ -25,45 +26,40 @@ public class PlayerController : MonoBehaviour
         InputAction attack = actionMap.FindAction("Attack");
         attack.performed += Attack_performed;
         InputAction pause = actionMap.FindAction("TogglePause");
-        pause.performed += Pause_performed;
+        //pause.performed += Pause_performed;
         InputAction jump = actionMap.FindAction("Jump");
         jump.performed += Jump_performed;
     }
 
     private void Movement_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log("Movement");
+        //Debug.Log("Movement");
 
         animator.CrossFade("Run", 0.1f);
     }
 
     private void Look_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log("Look");
+        //Debug.Log("Look");
     }
 
     private void Attack_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
 
-        // TODO: 改成状态机切换
+        // TODO: 鏀规垚鐘舵�佹満鍒囨崲
         animator.CrossFade("Attack", 0.1f);
     }
 
     private void Pause_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log("Pause");
+        //Debug.Log("Pause");
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log("Jump");
+        //Debug.Log("Jump");
 
         animator.CrossFade("Jump", 0.1f);
-    }
-
-    void Update()
-    {
-
     }
 }

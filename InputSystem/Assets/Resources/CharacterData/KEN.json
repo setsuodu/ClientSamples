@@ -1,6 +1,8 @@
 {
   "name": "KEN",
   "constants" : {
+    "WALK_LEFT" : 1620,
+    "WALK_RIGHT" : -1620,
     "WALK_FORWARD" : 2280,
     "WALK_BACKWARD" : -1620,
     "JUMP_VELOCITY_X" : 2400
@@ -26,6 +28,28 @@
       "staticHurtbox": true,
       "hurtBoxes": {
         "0": [[-320, 330, 0, 600],[-270,130,600,740]]
+      }
+    },
+    "WALK_LEFT": {
+      "animationName": "WALK_LEFT",
+      "distinctSprites": 11,
+      "totalFrames": 33,
+      "frameDuration": [3,3,3,3,3,3,3,3,3,3,3],
+      "collisionBox": [-250, 250, 0, 800],
+      "staticHurtbox": true,
+      "hurtBoxes": {
+        "0": [[-300, 300, 0, 970],[-70,130,970,1100]]
+      }
+    },
+    "WALK_RIGHT": {
+      "animationName": "WALK_RIGHT",
+      "distinctSprites": 11,
+      "totalFrames": 33,
+      "frameDuration": [3,3,3,3,3,3,3,3,3,3,3],
+      "collisionBox": [-250, 250, 0, 800],
+      "staticHurtbox": true,
+      "hurtBoxes": {
+        "0": [[-300, 300, 0, 970],[-70,130,970,1100]]
       }
     },
     "WALK_BACKWARD": {

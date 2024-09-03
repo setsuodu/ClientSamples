@@ -1,11 +1,15 @@
 using System.IO;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Newtonsoft.Json;
 using HitstunConstants;
 
 public class HitstunRunner : MonoBehaviour
 {
+    public static HitstunRunner Instance;
+    public PlayerInput playerInput;
+
     // Settings
     public bool showHitboxes = true;
     public bool manualStep = false;
@@ -41,6 +45,12 @@ public class HitstunRunner : MonoBehaviour
         return unchecked((int)((sum2 << 16) | sum1));
     }
 
+    void Awake()
+    {
+        Instance = this;
+        playerInput = GetComponent<PlayerInput>();
+    }
+
     void Start()
     {
         // Fix the FPS
@@ -51,7 +61,7 @@ public class HitstunRunner : MonoBehaviour
         LocalSession.Init(new GameState(), new NonGameState());
 
         // Init NonGameState
-        for (int i = 0; i <= 1; i++)
+        for (int i = 0; i < 1; i++)
         {
             LocalSession.ngs.players = new PlayerConnectionInfo[Constants.NUM_PLAYERS];
             LocalSession.ngs.players[i] = new PlayerConnectionInfo
@@ -146,19 +156,6 @@ public class HitstunRunner : MonoBehaviour
             characterViews[i].showHitboxes = showHitboxes;
             characterViews[i].UpdateCharacterView(gs.characters[i]);
         }
-        // update cameraPosition
-        //float xMean = (gs.characters[0].position.x + gs.characters[1].position.x) / 2.0f;
-        //float xMeanTranslated = (xMean - Constants.BOUNDS_WIDTH / 2.0f) / Constants.SCALE;
-        //float newCamPos = xMeanTranslated;
-        //if (newCamPos < Constants.CAM_LOWER_BOUND)
-        //{
-        //    newCamPos = Constants.CAM_LOWER_BOUND;
-        //}
-        //if (newCamPos > Constants.CAM_UPPER_BOUND)
-        //{
-        //    newCamPos = Constants.CAM_UPPER_BOUND;
-        //}
-        //mainCamera.transform.position = new Vector3(newCamPos, 1, -3);
     }
 
     void HandleDevKeys()
@@ -220,8 +217,8 @@ public class HitstunRunner : MonoBehaviour
         characterDatas = new CharacterData[Constants.NUM_PLAYERS];
         string jsonPath = string.Format("Assets/Resources/CharacterData/{0}.json", player1Character.ToString());
         characterDatas[0] = JsonConvert.DeserializeObject<CharacterData>(File.ReadAllText(jsonPath));
-        jsonPath = string.Format("Assets/Resources/CharacterData/{0}.json", player2Character.ToString());
-        characterDatas[1] = JsonConvert.DeserializeObject<CharacterData>(File.ReadAllText(jsonPath));
+        //jsonPath = string.Format("Assets/Resources/CharacterData/{0}.json", player2Character.ToString());
+        //characterDatas[1] = JsonConvert.DeserializeObject<CharacterData>(File.ReadAllText(jsonPath));
         LocalSession.characterDatas = characterDatas;
         LocalSession.gs.characterDatas = characterDatas;
     }

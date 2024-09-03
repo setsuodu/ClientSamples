@@ -48,6 +48,8 @@ public class Attack : Animation
 [Serializable]
 public class Params
 {
+    public int WALK_LEFT;
+    public int WALK_RIGHT;
     public int WALK_FORWARD;
     public int WALK_BACKWARD;
     public int JUMP_VELOCITY_X;

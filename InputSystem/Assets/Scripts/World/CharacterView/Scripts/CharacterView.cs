@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+Ôªøusing System.Collections.Generic;
 using UnityEngine;
 using HitstunConstants;
 using UnityEditor;
@@ -44,8 +44,8 @@ public class CharacterView : MonoBehaviour
         projectileBoxView.spriteRenderer.sortingLayerName = "HITBOX";
     }
 
-    // ∂¡»°∂Øª≠∂‘”¶µƒSprites
-    // ∂¡»°ƒ£–Õ°¢∂Øª≠
+    // ËØªÂèñÂä®ÁîªÂØπÂ∫îÁöÑSprites
+    // ËØªÂèñÊ®°Âûã„ÄÅÂä®Áîª
     public void LoadResources(CharacterData _data)
     {
         data = _data;
@@ -56,7 +56,7 @@ public class CharacterView : MonoBehaviour
         model.name = "model";
         animator = model.GetComponentInChildren<Animator>();
         //BattleEvent.doSetAnimeSpeed += SetAnimeSpeed;
-        animator.speed = 1; //’‚¿Ô“™≤•∑≈Idle°£PlayLoop() ±£¨ª·…ËŒ™0°£
+        animator.speed = 1; //ËøôÈáåË¶ÅÊí≠ÊîæIdle„ÄÇPlayLoop()Êó∂Ôºå‰ºöËÆæ‰∏∫0„ÄÇ
     }
 
     public void UpdateCharacterView(Character character)
@@ -67,33 +67,20 @@ public class CharacterView : MonoBehaviour
         currentFrame = (int)character.framesInState % currentAnimation.totalFrames;
         //if (currentState == CharacterState.DIE && character.framesInState >= currentAnimation.totalFrames)
         //{
-        //    return; //≥÷–¯++°£À¿Õˆ∂Øª≠≤•∑≈ÕÍ£¨≥πµ◊≤ª‘Ÿ≤•∑≈∂Øª≠°£
+        //    return; //ÊåÅÁª≠++„ÄÇÊ≠ª‰∫°Âä®ÁîªÊí≠ÊîæÂÆåÔºåÂΩªÂ∫ï‰∏çÂÜçÊí≠ÊîæÂä®Áîª„ÄÇ
         //}
-        animator.Play(currentAnimation.animationName, 0, (float)currentFrame / currentAnimation.totalFrames); //ø®∂Ÿ
+        animator.Play(currentAnimation.animationName, 0, (float)currentFrame / currentAnimation.totalFrames); //Âç°È°ø
+        //Debug.Log($"Anim : {currentState}");
 
         // x and y position
         float viewX = ((character.position.x - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
         float viewY = (character.position.y / Constants.SCALE);
-        transform.position = new Vector3(viewX, viewY, zDistance);
+        float viewZ = ((character.position.z - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
+        transform.position = new Vector3(viewX, viewY, viewZ);
 
         float maxY = Constants.BOUNDS_HEIGHT / Constants.SCALE;
         float normY = viewY / maxY;
         shadowProjector.orthographicSize = shadowSize * (1.0f - normY) * (1.0f - normY);
-
-        // sprite facing direction
-        spriteRenderer.flipX = character.facingRight;
-        float flipShadow = (character.facingRight) ? shadowOffset : -shadowOffset;
-        shadowProjector.transform.position = new Vector3(viewX + flipShadow, viewY + 2.0f, zDistance + 0.15f);
-
-        // set correct drawing layer
-        if (character.onTop)
-        {
-            spriteRenderer.sortingLayerName = "PLAYER_TOP";
-        }
-        else
-        {
-            spriteRenderer.sortingLayerName = "PLAYER_BOTTOM";
-        }
 
         // projectile
         if (character.projectile.active)
@@ -113,7 +100,6 @@ public class CharacterView : MonoBehaviour
             float projectileViewX = ((character.projectile.position.x - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
             float projectileViewY = (character.projectile.position.y / Constants.SCALE);
             projectileView.transform.position = new Vector3(projectileViewX, projectileViewY, zDistance);
-
         }
         else
         {
@@ -127,7 +113,7 @@ public class CharacterView : MonoBehaviour
             if (currentAnimation.collisionBox != null)
             {
                 collisionBoxView.spriteRenderer.enabled = true;
-                collisionBoxView.setRect(viewX, viewY, zDistance, character.facingRight, currentAnimation.collisionBox);
+                collisionBoxView.setRect(viewX, viewY, viewZ, true, currentAnimation.collisionBox);
             }
             else
             {
@@ -175,7 +161,7 @@ public class CharacterView : MonoBehaviour
                 for (int i = 0; i < character.hitBoxes.Count; i++)
                 {
                     if (!character.hitBoxes[i].enabled) continue;
-                    hitboxViews[i].setRect(viewX, viewY, zDistance, character.facingRight, character.hitBoxes[i].GetCoords());
+                    hitboxViews[i].setRect(viewX, viewY, viewZ, true, character.hitBoxes[i].GetCoords());
                     hitboxViews[i].spriteRenderer.enabled = true;
                 }
             }
@@ -206,7 +192,7 @@ public class CharacterView : MonoBehaviour
                 foreach (HitboxView hurtboxView in hurtboxViews)
                 {
                     hurtboxView.spriteRenderer.enabled = true;
-                    hurtboxView.setRect(viewX, viewY, zDistance, character.facingRight, hurtboxes[0].GetCoords());
+                    hurtboxView.setRect(viewX, viewY, viewZ, true, hurtboxes[0].GetCoords());
                     hurtboxes.RemoveAt(0);
                     if (hurtboxes.Count <= 0) break;
                 }

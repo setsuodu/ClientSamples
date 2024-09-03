@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
+﻿using System.IO;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -77,9 +75,10 @@ public class GameState
 
             characters[i].position.x = (Constants.BOUNDS_WIDTH / 2) + (2 * i - 1) * Constants.INITIAL_CHARACTER_DISPLACEMENT;
             characters[i].position.y = 0;
+            characters[i].position.z = 0;
 
-            characters[i].facingRight = (i == 0) ? true : false;
-            characters[i].onTop = (i == 0) ? true : false;
+            //characters[i].facingRight = (i == 0) ? true : false;
+            //characters[i].onTop = (i == 0) ? true : false;
         }
     }
 
@@ -119,6 +118,7 @@ public class GameState
             //Debug.Log($"[{i}]---p:[{characters[i].position.x}], v:[{characters[i].velocity.x}]");
             characters[i].position.x += characters[i].velocity.x / Constants.FPS;
             characters[i].position.y += characters[i].velocity.y / Constants.FPS;
+            characters[i].position.z += characters[i].velocity.z / Constants.FPS;
 
             // apply projectile velocity
             if (characters[i].projectile.active)
@@ -139,7 +139,7 @@ public class GameState
         HandleBounds();
 
         // update the facing direction depending on position and state
-        UpdateFacingDirection();
+        //UpdateFacingDirection();
     }
 
     public void ApplyHitBox(Character attackingChar, Character defendingChar, HitBox hitBox)
@@ -173,11 +173,11 @@ public class GameState
             // apply velocity
             if (defendingChar.IsInCorner())
             {
-                attackingChar.velocity.x = attackingChar.facingRight ? -hitBox.pushback : hitBox.pushback;
+                attackingChar.velocity.x = -hitBox.pushback;
             }
             else
             {
-                defendingChar.velocity.x = attackingChar.facingRight ? hitBox.pushback : -hitBox.pushback;
+                defendingChar.velocity.x = hitBox.pushback;
             }
         }
         // apply hit
@@ -198,24 +198,25 @@ public class GameState
             // apply velocity
             if (defendingChar.IsInCorner())
             {
-                attackingChar.velocity.x = attackingChar.facingRight ? -hitBox.pushback : hitBox.pushback;
+                attackingChar.velocity.x = -hitBox.pushback;
             }
             else
             {
-                defendingChar.velocity.x = attackingChar.facingRight ? hitBox.pushback : -hitBox.pushback;
+                defendingChar.velocity.x = hitBox.pushback;
             }
         }
     }
 
     public void HandleHitBoxes()
     {
+        /*
         HitBox[] applicableHitboxes = new HitBox[Constants.NUM_PLAYERS];
         for (int i = 0; i < Constants.NUM_PLAYERS; i++)
         {
             Character thisChar = characters[i];
-            Character otherchar = characters[1 - i];
+            //Character otherchar = characters[1 - i];
             CharacterData thisData = characterDatas[i];
-            CharacterData otherData = characterDatas[1 - i];
+            //CharacterData otherData = characterDatas[1 - i];
 
             List<Box> hurtBoxes;
             if (thisChar.hitBoxes.Count > 0 && otherchar.GetHurtBoxes(otherData, out hurtBoxes))
@@ -281,12 +282,14 @@ public class GameState
             if (applicableHitboxes[i] is null) continue;
             ApplyHitBox(characters[i], characters[1 - i], applicableHitboxes[i]);
         }
+        */
     }
 
     public void HandleCollisionBoxes()
     {
+        /*
         Box box1 = characters[0].GetCollisionBox(characterDatas[0]);
-        Box box2 = characters[1].GetCollisionBox(characterDatas[1]);
+        //Box box2 = characters[1].GetCollisionBox(characterDatas[1]);
 
         Box overlap;
         if (box1.GetOverlap(box2, out overlap))
@@ -340,10 +343,12 @@ public class GameState
             characters[0].position.x += resolveLeft ? -pushDistance : pushDistance;
             characters[1].position.x += resolveLeft ? pushDistance : -pushDistance;
         }
+        */
     }
 
     public void UpdateFacingDirection()
     {
+        /*
         // update facing direction
         for (int i = 0; i < Constants.NUM_PLAYERS; i++)
         {
@@ -357,6 +362,7 @@ public class GameState
             }
             characters[i].facingRight = newFacing;
         }
+        */
     }
 
     public void HandleBounds()
@@ -388,10 +394,10 @@ public class GameState
         for (int i = 0; i < Constants.NUM_PLAYERS; i++)
         {
             // force players to stay within max distance
-            if (Math.Abs(characters[i].position.x - characters[1 - i].position.x) > Constants.MAX_CHARACTER_DISTANCE && characters[i].velocity.x != 0)
-            {
-                characters[i].position.x -= characters[i].velocity.x / Constants.FPS;
-            }
+            //if (Math.Abs(characters[i].position.x - characters[1 - i].position.x) > Constants.MAX_CHARACTER_DISTANCE && characters[i].velocity.x != 0)
+            //{
+            //    characters[i].position.x -= characters[i].velocity.x / Constants.FPS;
+            //}
 
 
             // force players to stay within bounds
