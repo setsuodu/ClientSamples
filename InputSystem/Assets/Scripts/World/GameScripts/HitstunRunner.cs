@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,10 +19,9 @@ public class HitstunRunner : MonoBehaviour
     // Rendering
     public CharacterView characterView;
     CharacterView[] characterViews;
-    //public Camera mainCamera;
 
     // Character Data
-    // Ӣ��/�����
+    // 英雄/怪物表
     CharacterData[] characterDatas;
 
     // Internal
@@ -49,6 +48,26 @@ public class HitstunRunner : MonoBehaviour
     {
         Instance = this;
         playerInput = GetComponent<PlayerInput>();
+
+        InputActionMap playerMap = playerInput.actions.FindActionMap(actionMapPlayerControls);
+        InputAction pause = playerMap.FindAction("TogglePause");
+        pause.performed += Pause_performed;
+
+        InputActionMap menuMap = playerInput.actions.FindActionMap(actionMapMenuControls);
+        InputAction resume = menuMap.FindAction("TogglePause");
+        resume.performed += Resume_performed;
+    }
+
+    private void Pause_performed(InputAction.CallbackContext obj)
+    {
+        SwitchFocusedPlayerControlScheme();
+        Debug.Log($"Pause → {playerInput.currentActionMap.name}");
+    }
+
+    private void Resume_performed(InputAction.CallbackContext obj)
+    {
+        SwitchFocusedPlayerControlScheme();
+        Debug.Log($"Resume → {playerInput.currentActionMap.name}");
     }
 
     void Start()
@@ -247,5 +266,52 @@ public class HitstunRunner : MonoBehaviour
     public void TestLoad()
     {
         GameState.FromBytes(LocalSession.gs, buffer);
+    }
+
+
+    //Action Maps
+    private const string actionMapPlayerControls = "Player Controls";
+    private const string actionMapMenuControls = "Menu Controls";
+    public bool isPaused;
+    public GameObject uiMenu;
+
+    void ToggleTimeScale()
+    {
+        float newTimeScale = 0f;
+
+        switch (isPaused)
+        {
+            case true:
+                newTimeScale = 0f;
+                break;
+
+            case false:
+                newTimeScale = 1f;
+                break;
+        }
+
+        Time.timeScale = newTimeScale;
+    }
+
+    public void SwitchFocusedPlayerControlScheme()
+    {
+        isPaused = !isPaused;
+
+        ToggleTimeScale();
+
+        //TODO: 给角色View传递 isPaused
+
+        switch (isPaused)
+        {
+            case true:
+                playerInput.SwitchCurrentActionMap(actionMapMenuControls);
+                break;
+
+            case false:
+                playerInput.SwitchCurrentActionMap(actionMapPlayerControls);
+                break;
+        }
+
+        uiMenu.SetActive(isPaused);
     }
 }

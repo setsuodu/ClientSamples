@@ -555,8 +555,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610230864}
-  - component: {fileID: 610230865}
   - component: {fileID: 610230866}
+  - component: {fileID: 610230865}
   m_Layer: 0
   m_Name: WorldRunner
   m_TagString: Untagged
@@ -597,6 +597,8 @@ MonoBehaviour:
   player1Character: 0
   player2Character: 0
   characterView: {fileID: 4859713226901122751, guid: d2b363d148b49154cad6157737fd0243, type: 3}
+  isPaused: 0
+  uiMenu: {fileID: 1026522108}
 --- !u!114 &610230866
 MonoBehaviour:
   m_ObjectHideFlags: 0
