@@ -10,6 +10,8 @@ public class Character
     public Vector3Int velocity;
     //public bool facingRight;
     //public bool onTop;
+    //public Vector3Int rotation;
+    public uint rotationY;
     public CharacterState state;
     public uint framesInState;
     public uint blockStun;
@@ -834,7 +836,8 @@ public class Character
         uint latestInput = GetInputsByRelativeIndex(0);
         if ((latestInput & (uint)Inputs.INPUT_LEFT) != 0)
         {
-            SetCharacterState(CharacterState.WALK_LEFT);
+            //SetCharacterState(CharacterState.WALK_LEFT);
+            SetCharacterState(CharacterState.WALK_FORWARD);
             velocity.x = data.constants.WALK_LEFT;
             velocity.y = 0;
             velocity.z = 0;
@@ -842,7 +845,8 @@ public class Character
         }
         if ((latestInput & (uint)Inputs.INPUT_RIGHT) != 0)
         {
-            SetCharacterState(CharacterState.WALK_RIGHT);
+            //SetCharacterState(CharacterState.WALK_RIGHT);
+            SetCharacterState(CharacterState.WALK_FORWARD);
             velocity.x = data.constants.WALK_RIGHT;
             velocity.y = 0;
             velocity.z = 0;
@@ -858,7 +862,8 @@ public class Character
         }
         if ((latestInput & (uint)Inputs.INPUT_DOWN) != 0)
         {
-            SetCharacterState(CharacterState.WALK_BACKWARD);
+            //SetCharacterState(CharacterState.WALK_BACKWARD);
+            SetCharacterState(CharacterState.WALK_FORWARD);
             velocity.x = 0;
             velocity.y = 0;
             velocity.z = data.constants.WALK_BACKWARD;

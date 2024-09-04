@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UIBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TextMeshProUGUI deviceNameDisplayText;
+    public Image deviceDisplayIcon;
+
+    public void UpdatePlayerDeviceNameDisplayText(string newDeviceName)
     {
-        
+        deviceNameDisplayText.SetText(newDeviceName);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdatePlayerIconDisplayColor(Color newColor)
     {
-        
+        deviceDisplayIcon.color = newColor;
     }
 }

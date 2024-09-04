@@ -72,146 +72,20 @@ public class CharacterView : MonoBehaviour
         Debug.Log($"Anim : {currentState}");
 
         // x and y position
-        float viewX = ((character.position.x - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
-        float viewY = (character.position.y / Constants.SCALE);
-        float viewZ = ((character.position.z - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
+        //float viewX = ((character.position.x - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
+        //float viewY = (character.position.y / Constants.SCALE);
+        //float viewZ = ((character.position.z - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
+        //transform.position = new Vector3(viewX, viewY, viewZ);
+        // 朝摄像机方向移动
+        float viewX = character.position.x / Constants.SCALE; //定点数转浮点
+        float viewY = character.position.y / Constants.SCALE;
+        float viewZ = character.position.z / Constants.SCALE;
         transform.position = new Vector3(viewX, viewY, viewZ);
+
+
 
         float maxY = Constants.BOUNDS_HEIGHT / Constants.SCALE;
         float normY = viewY / maxY;
         shadowProjector.orthographicSize = shadowSize * (1.0f - normY) * (1.0f - normY);
-
-        // projectile
-        if (character.projectile.active)
-        {
-            projectileView.spriteRenderer.enabled = true;
-            int index;
-            if (character.projectile.activeSince < 2)
-            {
-                index = 0;
-            }
-            else
-            {
-                index = ((int)character.projectile.activeSince % (data.projectiles["FIREBALL"].distinctSprites - 1)) + 1;
-            }
-            projectileView.spriteRenderer.sprite = sprites["FIREBALL"][index];
-            projectileView.spriteRenderer.flipX = character.projectile.facingRight;
-            float projectileViewX = ((character.projectile.position.x - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
-            float projectileViewY = (character.projectile.position.y / Constants.SCALE);
-            projectileView.transform.position = new Vector3(projectileViewX, projectileViewY, zDistance);
-        }
-        else
-        {
-            projectileView.spriteRenderer.enabled = false;
-        }
-
-        // boxes
-        if (showHitboxes)
-        {
-            // collisionBox
-            if (currentAnimation.collisionBox != null)
-            {
-                collisionBoxView.spriteRenderer.enabled = true;
-                collisionBoxView.setRect(viewX, viewY, viewZ, true, currentAnimation.collisionBox);
-            }
-            else
-            {
-                collisionBoxView.spriteRenderer.enabled = false;
-            }
-
-            // projectile
-            if (character.projectile.active)
-            {
-                projectileBoxView.spriteRenderer.enabled = true;
-                float projectileViewX = ((character.projectile.position.x - Constants.BOUNDS_WIDTH / 2) / Constants.SCALE);
-                float projectileViewY = (character.projectile.position.y / Constants.SCALE);
-                projectileBoxView.setRect(projectileViewX, projectileViewY, zDistance, character.projectile.facingRight, new int[] { -25, 25, -100, 100 });
-            }
-            else
-            {
-                projectileBoxView.spriteRenderer.enabled = false;
-            }
-
-
-            //hitboxes
-            // deactivate all hitboxviews
-            foreach (HitboxView hitboxView in hitboxViews)
-            {
-                hitboxView.spriteRenderer.enabled = false;
-            }
-
-            if (character.hitBoxes.Count > 0)
-            {
-                int diff = character.hitBoxes.Count - hitboxViews.Count;
-                // instanciate additional hitboxviews, if needed
-                if (diff > 0)
-                {
-                    for (int i = 0; i < diff; i++)
-                    {
-                        HitboxView hitboxView = Instantiate(hitboxPrefab, transform);
-                        hitboxView.spriteRenderer.color = new Color(1f, 0f, 0f, .5f);
-                        hitboxView.spriteRenderer.sortingLayerName = "HITBOX";
-                        hitboxView.spriteRenderer.enabled = false;
-                        hitboxViews.Add(hitboxView);
-                    }
-                }
-
-                // set the hitboxviews to the correct place
-                for (int i = 0; i < character.hitBoxes.Count; i++)
-                {
-                    if (!character.hitBoxes[i].enabled) continue;
-                    hitboxViews[i].setRect(viewX, viewY, viewZ, true, character.hitBoxes[i].GetCoords());
-                    hitboxViews[i].spriteRenderer.enabled = true;
-                }
-            }
-
-            //hurtboxes
-            // deactivate all hurtboxviews
-            foreach (HitboxView hurtboxView in hurtboxViews)
-            {
-                hurtboxView.spriteRenderer.enabled = false;
-            }
-
-            List<Box> hurtboxes;
-            if (character.GetHurtBoxes(data, out hurtboxes))
-            {
-                int diff = hurtboxes.Count - hurtboxViews.Count;
-                // instanciate additional hurtboxViews, if needed
-                if (diff > 0)
-                {
-                    for (int i = 0; i < diff; i++)
-                    {
-                        HitboxView hurtBoxView = Instantiate(hitboxPrefab, transform);
-                        hurtBoxView.spriteRenderer.color = new Color(0f, 0f, 1f, .5f);
-                        hurtBoxView.spriteRenderer.sortingLayerName = "HURTBOX";
-                        hurtboxViews.Add(hurtBoxView);
-                    }
-                }
-                // set the hurtboxViews to the correct place
-                foreach (HitboxView hurtboxView in hurtboxViews)
-                {
-                    hurtboxView.spriteRenderer.enabled = true;
-                    hurtboxView.setRect(viewX, viewY, viewZ, true, hurtboxes[0].GetCoords());
-                    hurtboxes.RemoveAt(0);
-                    if (hurtboxes.Count <= 0) break;
-                }
-            }
-        }
-        else
-        {
-            // deactivate collisionboxview
-            collisionBoxView.spriteRenderer.enabled = false;
-            projectileBoxView.spriteRenderer.enabled = false;
-            // deactivate all hitboxviews
-            foreach (HitboxView hitboxView in hitboxViews)
-            {
-                hitboxView.spriteRenderer.enabled = false;
-            }
-            // deactivate all hurtboxviews
-            foreach (HitboxView hurtboxView in hurtboxViews)
-            {
-                hurtboxView.spriteRenderer.enabled = false;
-            }
-        }
     }
 }

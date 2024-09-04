@@ -73,9 +73,11 @@ public class GameState
         {
             characters[i] = new Character();
 
-            characters[i].position.x = (Constants.BOUNDS_WIDTH / 2) + (2 * i - 1) * Constants.INITIAL_CHARACTER_DISPLACEMENT;
+            //characters[i].position.x = (Constants.BOUNDS_WIDTH / 2) + (2 * i - 1) * Constants.INITIAL_CHARACTER_DISPLACEMENT;
+            characters[i].position.x = 0;
             characters[i].position.y = 0;
-            characters[i].position.z = 0;
+            characters[i].position.z = -6000;
+            characters[i].rotationY = 0;
 
             //characters[i].facingRight = (i == 0) ? true : false;
             //characters[i].onTop = (i == 0) ? true : false;
@@ -115,10 +117,12 @@ public class GameState
         // apply velocity（这一块是非确定性的！！使用了VectorInt）
         for (int i = 0; i < Constants.NUM_PLAYERS; i++)
         {
-            //Debug.Log($"[{i}]---p:[{characters[i].position.x}], v:[{characters[i].velocity.x}]");
+            //var fwd = Camera.main.transform.forward;
             characters[i].position.x += characters[i].velocity.x / Constants.FPS;
             characters[i].position.y += characters[i].velocity.y / Constants.FPS;
             characters[i].position.z += characters[i].velocity.z / Constants.FPS;
+
+
 
             // apply projectile velocity
             if (characters[i].projectile.active)
@@ -136,10 +140,10 @@ public class GameState
         HandleCollisionBoxes();
 
         // force players to stay within max distance and also within bounds of the stage
-        HandleBounds();
+        //HandleBounds();
 
         // update the facing direction depending on position and state
-        //UpdateFacingDirection();
+        UpdateFacingDirection();
     }
 
     public void ApplyHitBox(Character attackingChar, Character defendingChar, HitBox hitBox)
@@ -363,6 +367,8 @@ public class GameState
             characters[i].facingRight = newFacing;
         }
         */
+
+        //characters[0].rotationY = ;
     }
 
     public void HandleBounds()

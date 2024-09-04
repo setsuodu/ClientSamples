@@ -1,16 +1,16 @@
 {
   "name": "KEN",
   "constants" : {
-    "WALK_LEFT" : 1620,
-    "WALK_RIGHT" : -1620,
-    "WALK_FORWARD" : 2280,
-    "WALK_BACKWARD" : -1620,
+    "WALK_LEFT" : -2400,
+    "WALK_RIGHT" : 2400,
+    "WALK_FORWARD" : 3000,
+    "WALK_BACKWARD" : -2400,
     "JUMP_VELOCITY_X" : 2400
   },
   "animations": {
     "STAND": {
       "animationName": "STAND",
-      "distinctSprites": 10,
+      "distinctSprites": 20,
       "totalFrames": 34,
       "frameDuration": [3, 3, 4, 4, 4, 4, 3, 3, 3, 3],
       "collisionBox": [-250, 250, 0, 800],

@@ -49,6 +49,12 @@ public class HitstunRunner : MonoBehaviour
         Instance = this;
         playerInput = GetComponent<PlayerInput>();
 
+        currentControlScheme = playerInput.currentControlScheme;
+        playerInput.onDeviceLost += PlayerInput_onDeviceLost;
+        playerInput.onDeviceRegained += PlayerInput_onDeviceRegained;
+        playerInput.onControlsChanged += PlayerInput_onControlsChanged;
+        UpdateUIDisplay();
+
         InputActionMap playerMap = playerInput.actions.FindActionMap(actionMapPlayerControls);
         InputAction pause = playerMap.FindAction("TogglePause");
         pause.performed += Pause_performed;
@@ -56,6 +62,31 @@ public class HitstunRunner : MonoBehaviour
         InputActionMap menuMap = playerInput.actions.FindActionMap(actionMapMenuControls);
         InputAction resume = menuMap.FindAction("TogglePause");
         resume.performed += Resume_performed;
+    }
+
+    private void PlayerInput_onDeviceLost(PlayerInput obj)
+    {
+        Debug.Log("Device Lost");
+        //playerVisualsBehaviour.SetDisconnectedDeviceVisuals();
+    }
+
+    private void PlayerInput_onDeviceRegained(PlayerInput obj)
+    {
+        Debug.Log("Device Regained");
+        UpdateUIDisplay();
+    }
+
+    private void PlayerInput_onControlsChanged(PlayerInput obj)
+    {
+        Debug.Log("Controls Changed");
+        if (playerInput.currentControlScheme != currentControlScheme)
+        {
+            currentControlScheme = playerInput.currentControlScheme;
+
+            //playerVisualsBehaviour.UpdatePlayerVisuals();
+            //RemoveAllBindingOverrides();
+            UpdateUIDisplay();
+        }
     }
 
     private void Pause_performed(InputAction.CallbackContext obj)
@@ -313,5 +344,22 @@ public class HitstunRunner : MonoBehaviour
         }
 
         uiMenu.SetActive(isPaused);
+    }
+
+    [SerializeField]
+    private string currentControlScheme;
+    [Header("Device Display Settings")]
+    public DeviceDisplayConfigurator deviceDisplaySettings;
+    public UIBehaviour uiBehaviour;
+
+    void UpdateUIDisplay()
+    {
+        //uiBehaviour.UpdatePlayerIDDisplayText(playerID);
+
+        string deviceName = deviceDisplaySettings.GetDeviceName(playerInput);
+        uiBehaviour.UpdatePlayerDeviceNameDisplayText(deviceName);
+
+        Color deviceColor = deviceDisplaySettings.GetDeviceColor(playerInput);
+        uiBehaviour.UpdatePlayerIconDisplayColor(deviceColor);
     }
 }
