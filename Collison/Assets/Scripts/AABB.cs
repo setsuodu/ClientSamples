@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AABB : MonoBehaviour
@@ -9,17 +7,17 @@ public class AABB : MonoBehaviour
 
     public Transform[] objs;
 
-    public static bool Intersecting(Rect a, Rect b)
-    {
-        // Basic AABB collision detection. All of these must be true for there to be a collision.
-        bool comp1 = a.yMin > b.yMax;
-        bool comp2 = a.yMax < b.yMin;
-        bool comp3 = a.xMin < b.xMax;
-        bool comp4 = a.xMax > b.xMin;
+    //public static bool Intersecting(Rect a, Rect b)
+    //{
+    //    // Basic AABB collision detection. All of these must be true for there to be a collision.
+    //    bool comp1 = a.yMin > b.yMax;
+    //    bool comp2 = a.yMax < b.yMin;
+    //    bool comp3 = a.xMin < b.xMax;
+    //    bool comp4 = a.xMax > b.xMin;
 
-        // This will only return true if all are true.
-        return comp1 && comp2 && comp3 && comp4;
-    }
+    //    // This will only return true if all are true.
+    //    return comp1 && comp2 && comp3 && comp4;
+    //}
     public bool Intersect(Rect a, Rect b)
     {
         return (a.xMin <= b.xMax && a.xMax >= b.xMin) &&
