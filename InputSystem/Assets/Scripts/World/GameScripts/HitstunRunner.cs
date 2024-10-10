@@ -46,6 +46,10 @@ public class HitstunRunner : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log($"Size : byte={sizeof(byte)}, short={sizeof(short)}, int={sizeof(int)}, long={sizeof(long)}, float={sizeof(float)}, double={sizeof(double)},");
+        //Size : byte=1, short=2, int=4, long=8, float=4, double=8,
+        //Vector2(=4+4)=8, Vector3(=4+4+4)=12, 
+
         Instance = this;
         playerInput = GetComponent<PlayerInput>();
 
