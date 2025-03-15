@@ -45,4 +45,13 @@ public partial class UIChatHandler : MonoBehaviour
         }
         return _message;
     }
+
+    [SerializeField] InputField chatInput;
+    public void Send()
+    {
+        var result = FilterBadWords(chatInput.text);
+        Debug.Log(result);
+
+        chatInput.text = string.Empty;
+    }
 }
