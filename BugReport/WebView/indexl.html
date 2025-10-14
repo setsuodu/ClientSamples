@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table from Request</title>
+    <style>
+        table { border-collapse: collapse; width: 50%; margin: 20px auto; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: center; }
+        th { background: #eee; }
+		.normal-row {background-color: white;} /*待修正*/
+		.highlighted-row {background-color: lightgreen;} /*已修正*/
+    </style>
+</head>
+<body>
+    <h2 align="center">User Scores Table</h2>
+    <button onclick="loadTable()">Load Data</button>
+    <div id="tableContainer"></div>
+
+    <script>
+        function loadTable() {
+            fetch('http://localhost:5171/bugtrace') // Example API for demo
+                .then(response => response.json())
+                .then(data => {
+				
+					const rows = [];
+					//console.log(data.length); //2
+					for(let i = 0; i < data.length; i++) {
+						let item = data[i];
+						//console.log('---jsonStr---' + item.json);
+						
+						var jsonObject = JSON.parse(item.json);
+						//console.log(jsonObject);
+						//console.log('---id---' + i);
+						//console.log(jsonObject.Error_message);
+						//console.log(jsonObject.Stack_trace);
+						//console.log(jsonObject.Timestamp);
+						
+						let row = {
+							Error_message: jsonObject.Error_message,
+							Stack_trace: jsonObject.Stack_trace,
+							Timestamp: jsonObject.Timestamp,
+							owner: item.owner,
+							correct_time: item.correct_time
+						};
+						//console.log('....' + row.Error_message); //null
+						rows.push(row); //appendChild
+					}
+
+                    generateTable(rows);
+                })
+                .catch(err => {
+                    document.getElementById('tableContainer').innerHTML = "<p>Error loading data.</p>";
+                });
+        }
+
+        function generateTable(data) {
+            if (!data.length) return;
+            let html = "<table><tr>";
+            // Table headers
+            Object.keys(data[0]).forEach(key => {
+                html += `<th>${key}</th>`;
+            });
+            html += "</tr>";
+
+            // Table rows
+            data.forEach(row => {
+				//html += "<tr>";
+				if(row.owner == null) { //未修改
+					html += "<tr class='normal-row'>";
+				} else { //已修改
+					html += "<tr class='highlighted-row'>";
+				}
+				Object.values(row).forEach(val => {
+					html += `<td>${val}</td>`;
+                });
+				html += "</tr>";
+			});
+			html += "</table>";
+			
+			document.getElementById('tableContainer').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

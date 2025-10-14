@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Table with Different Row Colors (CSS Classes)</title>
+<style>
+  .row-odd {
+    background-color: #f2f2f2; /* Light gray */
+  }
+  .row-even {
+    background-color: #e6e6e6; /* Slightly darker gray */
+  }
+  .highlighted-row {
+    background-color: gold;
+  }
+</style>
+</head>
+<body>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Header 1</th>
+      <th>Header 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="row-odd">
+      <td>Row 1, Cell 1</td>
+      <td>Row 1, Cell 2</td>
+    </tr>
+    <tr class="row-even">
+      <td>Row 2, Cell 1</td>
+      <td>Row 2, Cell 2</td>
+    </tr>
+    <tr class="row-odd highlighted-row">
+      <td>Row 3, Cell 1</td>
+      <td>Row 3, Cell 2</td>
+    </tr>
+    <tr class="row-even">
+      <td>Row 4, Cell 1</td>
+      <td>Row 4, Cell 2</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+@BugReprotAPI_HostAddress = http://localhost:5171
+
+GET {{BugReprotAPI_HostAddress}}/bugtrace/
+Accept: application/json
+
+###
