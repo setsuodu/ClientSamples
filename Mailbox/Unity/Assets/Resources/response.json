@@ -1,0 +1,42 @@
+[
+  {
+    "title": "标题0",
+    "content": "亲爱的用户：\n内容0",
+    "attachments": "",
+    "datetime": "2024-06-01",
+    "endtime": null,
+    "is_read": true
+  },
+  {
+    "title": "标题1",
+    "content": "亲爱的用户：\n内容1",
+    "attachments": "",
+    "datetime": "2024-06-01",
+    "endtime": null,
+    "is_read": false
+  },
+  {
+    "title": "标题2",
+    "content": "亲爱的用户：\n内容2",
+    "attachments": "",
+    "datetime": "2024-06-02",
+    "endtime": null,
+    "is_read": false
+  },
+  {
+    "title": "标题3",
+    "content": "亲爱的用户：\n内容3",
+    "attachments": "",
+    "datetime": "2024-06-03",
+    "endtime": null,
+    "is_read": false
+  },
+  {
+    "title": "标题4",
+    "content": "亲爱的用户：\n内容4",
+    "attachments": "",
+    "datetime": "2024-06-04",
+    "endtime": null,
+    "is_read": false
+  }
+]
