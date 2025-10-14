@@ -1,22 +1,22 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ïÎ¿ÕÕÚÕÖ
+/// é•‚ç©ºé®ç½©
 /// </summary>
 public class HollowOutMask : Graphic, ICanvasRaycastFilter
 {
-    [Header("ïÎ¿ÕÇøÓò")]
+    [Header("é•‚ç©ºåŒºåŸŸ")]
     [Space(25)]
     public RectTransform inner_trans;
-    private RectTransform outer_trans;//±³¾°ÇøÓò
+    private RectTransform outer_trans;//èƒŒæ™¯åŒºåŸŸ
 
-    private Vector2 inner_rt;//ïÎ¿ÕÇøÓòµÄÓÒÉÏ½Ç×ø±ê
-    private Vector2 inner_lb;//ïÎ¿ÕÇøÓòµÄ×óÏÂ½Ç×ø±ê
-    private Vector2 outer_rt;//±³¾°ÇøÓòµÄÓÒÉÏ½Ç×ø±ê
-    private Vector2 outer_lb;//±³¾°ÇøÓòµÄ×óÏÂ½Ç×ø±ê
+    private Vector2 inner_rt;//é•‚ç©ºåŒºåŸŸçš„å³ä¸Šè§’åæ ‡
+    private Vector2 inner_lb;//é•‚ç©ºåŒºåŸŸçš„å·¦ä¸‹è§’åæ ‡
+    private Vector2 outer_rt;//èƒŒæ™¯åŒºåŸŸçš„å³ä¸Šè§’åæ ‡
+    private Vector2 outer_lb;//èƒŒæ™¯åŒºåŸŸçš„å·¦ä¸‹è§’åæ ‡
 
-    [Header("ÊÇ·ñÊµÊ±Ë¢ĞÂ")]
+    [Header("æ˜¯å¦å®æ—¶åˆ·æ–°")]
     [Space(25)]
     public bool realtimeRefresh;
 
@@ -26,7 +26,7 @@ public class HollowOutMask : Graphic, ICanvasRaycastFilter
 
         outer_trans = GetComponent<RectTransform>();
 
-        //¼ÆËã±ß½ç
+        //è®¡ç®—è¾¹ç•Œ
         CalcBounds();
     }
 
@@ -43,32 +43,32 @@ public class HollowOutMask : Graphic, ICanvasRaycastFilter
         UIVertex vertex = UIVertex.simpleVert;
         vertex.color = color;
 
-        //0 outer×óÏÂ½Ç
+        //0 outerå·¦ä¸‹è§’
         vertex.position = new Vector3(outer_lb.x, outer_lb.y);
         vh.AddVert(vertex);
-        //1 outer×óÉÏ½Ç
+        //1 outerå·¦ä¸Šè§’
         vertex.position = new Vector3(outer_lb.x, outer_rt.y);
         vh.AddVert(vertex);
-        //2 outerÓÒÉÏ½Ç
+        //2 outerå³ä¸Šè§’
         vertex.position = new Vector3(outer_rt.x, outer_rt.y);
         vh.AddVert(vertex);
-        //3 outerÓÒÏÂ½Ç
+        //3 outerå³ä¸‹è§’
         vertex.position = new Vector3(outer_rt.x, outer_lb.y);
         vh.AddVert(vertex);
-        //4 inner×óÏÂ½Ç
+        //4 innerå·¦ä¸‹è§’
         vertex.position = new Vector3(inner_lb.x, inner_lb.y);
         vh.AddVert(vertex);
-        //5 inner×óÉÏ½Ç
+        //5 innerå·¦ä¸Šè§’
         vertex.position = new Vector3(inner_lb.x, inner_rt.y);
         vh.AddVert(vertex);
-        //6 innerÓÒÉÏ½Ç
+        //6 innerå³ä¸Šè§’
         vertex.position = new Vector3(inner_rt.x, inner_rt.y);
         vh.AddVert(vertex);
-        //7 innerÓÒÏÂ½Ç
+        //7 innerå³ä¸‹è§’
         vertex.position = new Vector3(inner_rt.x, inner_lb.y);
         vh.AddVert(vertex);
 
-        //»æÖÆÈı½ÇĞÎ
+        //ç»˜åˆ¶ä¸‰è§’å½¢
         vh.AddTriangle(0, 1, 4);
         vh.AddTriangle(1, 4, 5);
         vh.AddTriangle(1, 5, 2);
@@ -80,7 +80,7 @@ public class HollowOutMask : Graphic, ICanvasRaycastFilter
     }
 
     /// <summary>
-    /// ¹ıÂËµôÉäÏß¼ì²â
+    /// è¿‡æ»¤æ‰å°„çº¿æ£€æµ‹
     /// </summary>
     bool ICanvasRaycastFilter.IsRaycastLocationValid(Vector2 screenPos, Camera eventCamera)
     {
@@ -93,7 +93,7 @@ public class HollowOutMask : Graphic, ICanvasRaycastFilter
     }
 
     /// <summary>
-    /// ¼ÆËã±ß½ç
+    /// è®¡ç®—è¾¹ç•Œ
     /// </summary>
     private void CalcBounds()
     {
@@ -116,9 +116,9 @@ public class HollowOutMask : Graphic, ICanvasRaycastFilter
             return;
         }
 
-        //¼ÆËã±ß½ç
+        //è®¡ç®—è¾¹ç•Œ
         CalcBounds();
-        //Ë¢ĞÂ
+        //åˆ·æ–°
         SetAllDirty();
     }
 }
