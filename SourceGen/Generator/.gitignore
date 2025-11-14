@@ -1,0 +1,8 @@
+bin/
+obj/
+*.csproj.user
+*.nupkg
+*.snupkg
+.vs/
+.vscode/
+.idea/
