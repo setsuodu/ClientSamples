@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "com.cysharp.memorypack": "1.21.4",
+    "com.cysharp.messagepipe": "1.8.1",
+    "com.cysharp.messagepipe.vcontainer": "1.8.1",
     "com.cysharp.unitask": "2.5.10",
     "com.github-glitchenzo.nugetforunity": "4.5.0",
     "com.unity.ide.visualstudio": "2.0.26",
