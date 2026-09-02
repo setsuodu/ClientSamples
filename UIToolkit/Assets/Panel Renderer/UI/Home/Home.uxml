@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ui:UXML
+    xmlns:ui="UnityEngine.UIElements">
+
+    <ui:VisualElement
+        name="home-root"
+        class="home-root">
+
+        <!-- Background -->
+        <ui:VisualElement
+            name="background"
+            class="background" />
+
+        <!-- Main content -->
+        <ui:VisualElement
+            name="content"
+            class="content">
+
+            <ui:Label
+                name="title"
+                text="HOME"
+                class="title" />
+
+            <ui:Button
+                name="btn-login"
+                text="LOGIN"
+                class="primary-button" />
+
+        </ui:VisualElement>
+
+        <!-- Dynamic popup layer -->
+        <ui:VisualElement
+            name="login-layer"
+            class="login-layer" />
+
+    </ui:VisualElement>
+
+</ui:UXML>

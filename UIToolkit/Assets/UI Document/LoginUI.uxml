@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <!-- 外层容器：居中对齐 -->
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; background-color: #2B2B2B;">
+        <!-- 登录面板 -->
+        <ui:VisualElement style="width: 300px; padding: 20px; background-color: #3C3C3C; border-radius: 8px;">
+            <ui:Label text="账号登录" style="font-size: 20px; color: white; -unity-font-style: bold; margin-bottom: 15px; -unity-text-align: middle-center;" />
+            
+            <!-- 账号输入框 -->
+            <ui:TextField label="账号" name="input-username" style="margin-bottom: 10px;" />
+            
+            <!-- 密码输入框 -->
+            <ui:TextField label="密码" name="input-password" password="true" style="margin-bottom: 20px;" />
+            
+            <!-- 登录按钮 -->
+            <ui:Button text="登 录" name="btn-login" style="height: 35px; background-color: #4CAF50; color: white;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

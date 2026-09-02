@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ui:UXML
+    xmlns:ui="UnityEngine.UIElements">
+
+    <ui:VisualElement
+        name="login-popup"
+        class="login-popup">
+
+        <!-- Dim background -->
+        <ui:VisualElement
+            name="dim"
+            class="login-dim" />
+
+        <!-- Window -->
+        <ui:VisualElement
+            name="window"
+            class="login-window">
+
+            <ui:Label
+                name="title"
+                text="LOGIN"
+                class="login-title" />
+
+            <ui:TextField
+                name="input-username"
+                label="Username"
+                class="login-input" />
+
+            <ui:TextField
+                name="input-password"
+                label="Password"
+                password="true"
+                class="login-input" />
+
+            <ui:VisualElement
+                name="buttons"
+                class="login-buttons">
+
+                <ui:Button
+                    name="btn-submit"
+                    text="LOGIN"
+                    class="primary-button" />
+
+                <ui:Button
+                    name="btn-close"
+                    text="CLOSE"
+                    class="secondary-button" />
+
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

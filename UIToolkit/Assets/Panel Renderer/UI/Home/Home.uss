@@ -1,0 +1,40 @@
+.home-root {
+    flex-grow: 1;
+    position: relative;
+}
+
+.background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    background-color: rgb(30, 35, 45);
+}
+
+.content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    margin-bottom: 30px;
+
+    color: white;
+    font-size: 48px;
+    -unity-font-style: bold;
+}
+
+.primary-button {
+    width: 260px;
+    height: 70px;
+
+    font-size: 28px;
+}

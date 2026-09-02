@@ -1,7 +1,14 @@
-# TODO:
+# BugReport
 
-## 一、安装数据库
-客户端捕捉异常，以json格式提交，MySQL对json处理比较吃力，这里选用postgreSQL。
+## 简介
+
+客户端的捕获错误 API 上报
+
+## 环境
+
+postgres
+
+## 步骤
 
 下载镜像
 
