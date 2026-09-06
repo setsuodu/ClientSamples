@@ -145,11 +145,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11111111111111111111111111111111, type: 3}
+  m_Script: {fileID: 11500000, guid: d8a811afbac301244be9b0e9cd643022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remoteVersionUrl: 
+  updater: {fileID: 0}
   canvas: {fileID: 0}
+  autoAddUpdater: 1
 --- !u!4 &1003
 Transform:
   m_ObjectHideFlags: 0

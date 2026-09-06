@@ -1,0 +1,6 @@
+{
+  "remoteRoot": "http://127.0.0.1/AssetBundles",
+  "configRemoteUrl": "",
+  "enableHotUpdate": true,
+  "timeoutSeconds": 30
+}

@@ -1,0 +1,12 @@
+services:
+  ab-server:
+    image: nginx:alpine
+    container_name: assetbundle-server
+    ports:
+      - "80:80"
+    volumes:
+      # 把本地 Build/AssetBundles 挂到容器的 /usr/share/nginx/html/AssetBundles
+      - ./Build/AssetBundles:/usr/share/nginx/html/AssetBundles:ro
+      # 可选：自定义 nginx 配置（支持 CORS）
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped

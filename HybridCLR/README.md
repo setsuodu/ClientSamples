@@ -2,6 +2,12 @@
 
 这是一个极简 Unity UGUI 案例，目标流程是：**启动检查版本 → AssetBundleFramework 初始化并下载 AB → 显示登录页 → 输入任意非空账号密码 → 直接进入主页**。
 
+## Environment
+
+> Unity6000.5.x/6.x 向CLR迁移过程，大量底层API变更，目前不支持 HybridCLR。 
+6000.5.x 才开始支持 Panel Renderer，UI Document 长期将废弃。
+所以本案例使用 6000.3.x LTS + uGUI
+
 ## 依赖
 
 | 依赖 | 版本/来源 |

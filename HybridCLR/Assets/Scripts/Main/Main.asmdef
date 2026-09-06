@@ -1,12 +1,12 @@
 {
-    "name": "HotUpdate",
+    "name": "Main",
     "rootNamespace": "",
     "references": [
-        "Main",
         "UniTask",
-        "UnityEngine.UI",
         "Unity.TextMeshPro",
-        "com.setsuodu.AssetBundleFramework"
+        "UnityEngine.UI",
+        "com.setsuodu.AssetBundleFramework",
+        "HybridCLR.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
