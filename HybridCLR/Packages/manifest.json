@@ -4,9 +4,9 @@
       "name": "package.openupm.com",
       "url": "https://package.openupm.com",
       "scopes": [
-        "com.setsuodu.assetbundleframework",
-        "com.cysharp.unitask",
-        "com.code-philosophy.hybridclr"
+        "com.setsuodu",
+        "com.cysharp",
+        "com.code-philosophy"
       ]
     }
   ],
